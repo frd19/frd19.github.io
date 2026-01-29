@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Portofolio</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(to right, rgb(255, 255, 255), rgb(173, 199, 254));
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+        nav {
+            position: sticky;
+            top: 0;
+            height: 10vh;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(6px);
+        }
+
+        .nav-container {
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: rgb(0, 7, 109);
+        }
+
+        .nav-container .links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-container .links a {
+            text-decoration: none;
+            color: black;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-container .links a::before {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: rgb(0, 2, 109);
+            transition: 0.3s;
+        }
+
+        .nav-container .links a:hover::before {
+            width: 100%;
+        }
+
+        .contact-btn {
+            border: 2px solid rgb(0, 69, 109);
+            padding: 5px 20px;
+            border-radius: 20px;
+        }
+
+        .contact-btn a {
+            color: black;
+        }
+
+        .contact-btn:hover {
+            background: rgb(0, 78, 109);
+        }
+
+        .contact-btn:hover a {
+            color: white;
+        }
+
+        /* ================= MOBILE NAV ================= */
+        .hamburg,
+        .cancel {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            transform: translateY(-500px);
+            backdrop-filter: brightness(40%) blur(3px);
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .dropdown .links a {
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            text-decoration: none;
+        }
+
+        .dropdown .links a:hover {
+            background: rgb(0, 78, 109);
+        }
+
+        /* Styling untuk list pengalaman */
+        .experience-list {
+            margin-top: 20px;
+        }
+
+        .experience-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgb(0, 102, 109);
+        }
+
+        .experience-item strong {
+            color: rgb(0, 102, 109);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .experience-item p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .detail-link {
+            margin-top: 20px;
+        }
+
+        .detail-link a {
+            color: #0077b5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .detail-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= SECTION ================= */
+        section {
+            width: 100%;
+            min-height: calc(100vh - 10vh);
+            padding-top: 10vh;
+            scroll-margin-top: 10vh;
+        }
+
+
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            width: 100%;
+        }
+
+        .image {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image img {
+            width: 70%;
+            max-width: 320px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 102, 109, 0.6);
+        }
+
+        .content {
+            width: 40%;
+        }
+
+        .content h1 span {
+            color: rgb(0, 102, 109);
+            text-shadow: 0 0 10px rgb(0, 102, 109);
+        }
+
+        .typewriter span::before {
+            content: "QA TESTER";
+            animation: words 10s infinite;
+        }
+
+        .typewriter span::after {
+            content: "";
+            border-left: 3px solid black;
+            margin-left: 5px;
+            animation: cursor 0.6s infinite;
+        }
+
+        @keyframes cursor {
+            to {
+                border-left-color: transparent;
+            }
+        }
+
+        @keyframes words {
+
+            0%,
+            50% {
+                content: "QA TESTER";
+            }
+
+            51%,
+            100% {
+                content: "SOFTWARE TESTER";
+            }
+        }
+
+        .social-links i {
+            margin-right: 10px;
+            border: 2px solid rgb(0, 74, 109);
+            padding: 10px;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-links i:hover {
+            background: rgb(0, 11, 109);
+            color: white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: rgb(0, 47, 109);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* ===== ABOUT GALLERY (DESKTOP DEFAULT) ===== */
+        .about-gallery {
+            margin: 80px auto 0;
+            padding: 40px;
+            max-width: 900px;
+            /* 🔑 INI YANG KAMU MAU */
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 32px;
+            text-align: center;
+        }
+
+        .about-gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 35px;
+        }
+
+        .about-gallery h2 span {
+            color: rgb(0, 102, 109);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 12px;
+            border-radius: 16px;
+            box-shadow: 0 0 12px rgba(0, 102, 109, 0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 140px;
+            /* 🔒 FIXED */
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .gallery-item p {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        #about .main-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        #contact {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .copy-img {
+            width: 180px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .copy-img:hover {
+            transform: scale(1.05);
+        }
+
+        #copyText {
+            display: none;
+            /* tidak terlihat */
+        }
+
+        #copiedMsg {
+            display: none;
+            margin-top: 12px;
+            color: rgb(0, 102, 109);
+            font-weight: 500;
+        }
+
+        /* 🔑 STYLING CARD YANG CLICKABLE */
+        .gallery-item {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 0 12px rgba(0, 102, 109, 0.25);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 102, 109, 0.4);
+        }
+
+        .gallery-item:hover img {
+            filter: brightness(0.9);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+            transition: filter 0.3s ease;
+        }
+
+        .gallery-item p {
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgb(0, 7, 109);
+        }
+
+        .detail-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .detail-link span {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .detail-link a {
+            color: #0077b5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .detail-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 884px) {
+            .nav-container .links {
+                display: none;
+            }
+
+            .hamburg {
+                display: block;
+            }
+
+            .main-container {
+                flex-direction: column;
+            }
+
+            .content,
+            .image {
+                width: 80%;
+                text-align: center;
+            }
+
+            .about-content h1 {
+                font-size: clamp(2rem, 2.5vw, 3rem);
+                margin-bottom: 20px;
+            }
+
+            .about-content h1 span {
+                color: rgb(0, 102, 109);
+                text-shadow: 0 0 8px rgba(0, 102, 109, 0.6);
+            }
+
+            .about-content p {
+                font-size: 1rem;
+                line-height: 1.8;
+                color: #333;
+            }
+
+            @media (max-width: 768px) {
+                .about-content {
+                    padding: 30px 15px;
+                }
+
+                .about-content p {
+                    font-size: 0.95rem;
+                }
+            }
+
+            @media (max-width: 884px) {
+                .gallery-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                .about-gallery {
+                    padding: 40px 20px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .gallery-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in">
+                <span>Firda Lailia Rizki</span>
+            </div>
+
+            <div class="links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#project">Project</a>
+                <a href="#qatester">QA Tester</a>
+                <div class="contact-btn"><a href="#contact">Contact</a></div>
+            </div>
+
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+
+        <div class="dropdown">
+            <div class="links">
+                <a href="#home" onclick="cancel()">Home</a>
+                <a href="#about" onclick="cancel()">About</a>
+                <a href="#project" onclick="cancel()">Project</a>
+                <a href="#qatester" onclick="cancel()">QA Tester</a>
+                <a href="#contact" onclick="cancel()">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home">
+        <div class="main-container">
+            <div class="image">
+                <img src="https://lh3.googleusercontent.com/d/11XXT8ayW4EMGOsCRQxHbt7AUlTpAUExr">
+            </div>
+
+            <div class="content">
+                <h1>Hey I'm <span>Firda</span></h1>
+                <div class="typewriter">I'm a <span></span></div>
+                <p>
+                    A Bachelor’s degree graduate in Information Systems with a GPA of 3.75 out of 4.00,
+                    completed in 3.5 years (7 semesters).
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/frd19" target="_blank" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/firdalailiaa/" target="_blank" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/firda-lailia-rizki" target="_blank" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+
+                <a href="https://drive.google.com/file/d/14s3nbaSA6FRK5Gt_2jchrTh22epXOr2S/view?usp=sharing"
+                    target="_blank" class="btn-cv">
+                    <button>Download CV</button>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <!-- ABOUT HEADER -->
+        <div class="main-container about-top">
+            <div class="image">
+                <img src="https://lh3.googleusercontent.com/d/1X_7KomUjBSmd3UYBnsCjeRppwrnCbItQ">
+            </div>
+
+            <div class="content">
+                <h1>About <span>Me</span></h1>
+                <p>
+                    In the social sector, I have a strong interest in the empowerment of children and women.
+                    I have also been entrusted with leadership roles in several communities and divisions.
+                </p>
+            </div>
+        </div>
+
+        <!-- ABOUT GALLERY (BAGIAN BAWAH, MASIH ABOUT) -->
+        <div class="about-gallery">
+            <h2><span>Organizational Experience, Public Speaking, and Leadership</span></h2>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1z8AwPKzrCFw-h5ayLoZGu6AwVIXiHwz_">
+                    <p>President Of Girl Up Unesa 2025</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1dFYSD3bcDSUDzHs4oD4KT1GK18MPslgf">
+                    <p>Head of IPPNU PR Kajartengguli 2022</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1X_7KomUjBSmd3UYBnsCjeRppwrnCbItQ">
+                    <p>Vice Head Swayanaka Program Division</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1JwAk7Ykn985wa8NyVOq0jjaSnYmN5fsV">
+                    <p>Student Ambassador Bisa Ai</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1rp3p7C2j1P9Di8YsWzzFNf89VmyWtKGR">
+                    <p>I Am Woman Ambassador</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1lsw_dFl8M99_J-xFA6aWReW31QR7I7Uw">
+                    <p>Tribe PT Analis Forensik Digital MSIB Batch 7</p>
+                </div>
+                <div style="text-align: center;">
+                    <span style="display: inline-block; white-space: nowrap;">
+                        for more detail: <a href="https://www.linkedin.com/in/firda-lailia-rizki" target="_blank"
+                            style="color: #0077b5; text-decoration: none;">www.linkedin.com/in/firda-lailia-rizki</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- ABOUT GALLERY (BAGIAN BAWAH, MASIH ABOUT) -->
+        <div class="about-gallery">
+            <h2><span>Competitions and sertificates</span></h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1zPN9RGmtTC4Yj_mdtlVCFhAM_XQTFMk9">
+                    <p>Mathematics Gold Medal</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/19VGXwll4zWjniRA57qJGwOZ74c7TG6Aq">
+                    <p>Mathematics Silver Medal</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1-dVjHNLVkRrF0ijvgzisdy5Vw1a5vhw9">
+                    <p>Samsung Innovation Campus</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/d/1Zx9xH6ahYiDG8o69tCnbnyKZAl_-6muQ">
+                    <p>MSIB Batch 7 Analis Forensik Digital dan Web cyber security</p>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+
+        <!-- PLACEHOLDER -->
+        <section id="project">
+            <div class="main-container project-container">
+                <h1>My <span>Projects</span></h1>
+
+                <div class="gallery-grid">
+                    <!-- 1. Glamscan (Glide App) -->
+                    <a href="https://glamscan.glide.page" target="_blank" class="gallery-item">
+                        <img src="https://lh3.googleusercontent.com/d/1hAiCHqbEMLpz1P0mB8Wci4Rg-huYvoyL" alt="Glamscan">
+                        <p>Glamscan</p>
+                    </a>
+
+                    <!-- 2. Heyphone -->
+                    <a href="https://heyphone-chok.glide.page" target="_blank" class="gallery-item">
+                        <img src="https://lh3.googleusercontent.com/d/121b78mT_05CrWTUHKKJ9LRlstnwxSdUk" alt="Heyphone">
+                        <p>Heyphone</p>
+                    </a>
+
+                    <!-- 3. Pentako -->
+                    <a href="https://sites.google.com/view/pentako/home" target="_blank" class="gallery-item">
+                        <img src="https://lh3.googleusercontent.com/d/1DflF_DxhI9tXW1eWAHvLvy0akq2fyyLR" alt="Pentako">
+                        <p>Pentako</p>
+                    </a>
+
+                    <!-- 4. Everbound -->
+                    <a href="https://edu-2022-kelompok5.odoo.com/web/login" target="_blank" class="gallery-item">
+                        <img src="https://lh3.googleusercontent.com/d/1Os25QyssoMUWfsJOK75ki7yZ5Lma277J"
+                            alt="Everbound">
+                        <p>Everbound</p>
+                    </a>
+
+                    <!-- 5. Website Portofolio -->
+                    <a href="https://frd19.github.io/firda-portfolio/#About" target="_blank" class="gallery-item">
+                        <img src="https://lh3.googleusercontent.com/d/1X_7KomUjBSmd3UYBnsCjeRppwrnCbItQ"
+                            alt="Website Portofolio">
+                        <p>Website Portofolio</p>
+                    </a>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <section id="qatester">
+                <div class="main-container about-top">
+                    <div class="image">
+                        <img src="https://lh3.googleusercontent.com/d/1X_7KomUjBSmd3UYBnsCjeRppwrnCbItQ">
+                    </div>
+
+                     <div class="experience-list">
+                    <div class="experience-item">
+                        <strong>February - July 2025: QA Tester PT Xenopati (Intern)</strong>
+                        <p>Handle few project testing on mobile, website, or backed. Ngabsen.id, Bayi bunda group, Chatour umroh app, and janisari.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <strong>August - December 2025: QA Tester (Project) Bejo Tech.Ltd</strong>
+                        <p>Sakti mobile and website.</p>
+                    </div>
+
+                    <div class="experience-item">
+                        <strong>July 2025 - January 2026: Final Project Software Tester</strong>
+                        <p>"Studi Komparatif Terkait Perbandingan Metode Pengujian Manual dan Otomatis dengan Katalon Studio menggunakan Parameter ISO 25010"</p>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <img src="https://lh3.googleusercontent.com/d/1ax9qfCGucwO0hh-vyjkg7EsaWnZzXBCZ" alt="Contact">
+            </section>
+
+
+            <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+            <script>
+                AOS.init({ offset: 0 });
+
+                function hamburg() {
+                    document.querySelector(".dropdown").style.transform = "translateY(0)";
+                }
+
+                function cancel() {
+                    document.querySelector(".dropdown").style.transform = "translateY(-500px)";
+                }
+            </script>
+
+</body>
+
+</html>
